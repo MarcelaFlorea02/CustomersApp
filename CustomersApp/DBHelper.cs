@@ -48,11 +48,66 @@ FROM Customer";
             customerList.Add(customer);
         }
         return customerList;
-    }   
+    }
 
     //CrateCustomer 
+    public void AddCustomer(Customer customer)
+    {
+        using var connection = new SqlConnection(_dbConnectionString);
+
+        const string sql = @"
+INSERT INTO Customer (FirstName, LastName, Email, Phone)
+VALUES (@FirstName, @LastName, @Email, @Phone)";
+
+        connection.Open();
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+        command.Parameters.AddWithValue("@LastName", customer.LastName);
+        command.Parameters.AddWithValue("@Email", customer.Email);
+        command.Parameters.AddWithValue("@Phone", customer.Phone);
+
+        command.ExecuteNonQuery();
+
+    }
 
     //UpdateCustomer 
+    public void UpdateCustomer(Customer customer)
+    {
+        using var connection = new SqlConnection(_dbConnectionString);
+
+        const string sql = @"
+UPDATE Customer 
+SET 
+FirstName=@FirstName, 
+LastName=@LastName,
+Email=@Email,
+Phone=@Phone
+WHERE Id=@Id";
+
+        connection.Open();
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@FirstName", customer.FirstName);
+        command.Parameters.AddWithValue("@LastName", customer.LastName);
+        command.Parameters.AddWithValue("@Email", customer.Email);
+        command.Parameters.AddWithValue("@Phone", customer.Phone);
+        command.Parameters.AddWithValue("@Id", customer.Id);
+
+        command.ExecuteNonQuery();
+    }
 
     //DeleteCustomer
+    public void DeleteCustomer(int id)
+    {
+        using var connection = new SqlConnection(_dbConnectionString);
+
+        const string sql = @"
+DELETE FROM Customer
+WHERE Id=@Id";
+
+        connection.Open();
+        using var command = new SqlCommand(sql, connection);
+        command.Parameters.AddWithValue("@Id", id);
+
+        command.ExecuteNonQuery();
+    }
 }
