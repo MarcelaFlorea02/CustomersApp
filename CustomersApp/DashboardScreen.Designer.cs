@@ -49,7 +49,7 @@
             // addButton
             // 
             addButton.BackColor = Color.FromArgb(128, 255, 128);
-            addButton.Location = new Point(75, 237);
+            addButton.Location = new Point(78, 548);
             addButton.Name = "addButton";
             addButton.Size = new Size(188, 58);
             addButton.TabIndex = 1;
@@ -59,7 +59,7 @@
             // updateButton
             // 
             updateButton.BackColor = Color.FromArgb(255, 255, 128);
-            updateButton.Location = new Point(75, 352);
+            updateButton.Location = new Point(78, 663);
             updateButton.Name = "updateButton";
             updateButton.Size = new Size(188, 58);
             updateButton.TabIndex = 2;
@@ -69,12 +69,13 @@
             // deleteButton
             // 
             deleteButton.BackColor = Color.Red;
-            deleteButton.Location = new Point(75, 474);
+            deleteButton.Location = new Point(78, 785);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(188, 58);
             deleteButton.TabIndex = 3;
             deleteButton.Text = "DELETE";
             deleteButton.UseVisualStyleBackColor = false;
+            deleteButton.Click += deleteButton_Click;
             // 
             // dataGridView1
             // 
@@ -82,14 +83,14 @@
             dataGridView1.Location = new Point(352, 202);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 102;
-            dataGridView1.Size = new Size(1062, 599);
+            dataGridView1.Size = new Size(2100, 1065);
             dataGridView1.TabIndex = 4;
             // 
             // DashboardScreen
             // 
             AutoScaleDimensions = new SizeF(17F, 41F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1523, 929);
+            ClientSize = new Size(2573, 1390);
             Controls.Add(dataGridView1);
             Controls.Add(deleteButton);
             Controls.Add(updateButton);
@@ -97,6 +98,7 @@
             Controls.Add(label1);
             Name = "DashboardScreen";
             Text = "DashboardScreen";
+            Load += DashboardScreen_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
