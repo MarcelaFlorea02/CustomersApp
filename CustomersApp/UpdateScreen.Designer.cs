@@ -49,6 +49,7 @@
             saveButton.TabIndex = 19;
             saveButton.Text = "SAVE";
             saveButton.UseVisualStyleBackColor = false;
+            saveButton.Click += saveButton_Click;
             // 
             // phoneInput
             // 

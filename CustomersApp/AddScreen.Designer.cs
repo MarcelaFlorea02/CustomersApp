@@ -123,6 +123,7 @@
             saveButton.TabIndex = 9;
             saveButton.Text = "SAVE";
             saveButton.UseVisualStyleBackColor = false;
+            saveButton.Click += saveButton_Click;
             // 
             // AddScreen
             // 

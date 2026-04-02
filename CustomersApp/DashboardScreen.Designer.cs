@@ -55,6 +55,7 @@
             addButton.TabIndex = 1;
             addButton.Text = "ADD";
             addButton.UseVisualStyleBackColor = false;
+            addButton.Click += addButton_Click;
             // 
             // updateButton
             // 
@@ -65,6 +66,7 @@
             updateButton.TabIndex = 2;
             updateButton.Text = "UPDATE";
             updateButton.UseVisualStyleBackColor = false;
+            updateButton.Click += updateButton_Click;
             // 
             // deleteButton
             // 

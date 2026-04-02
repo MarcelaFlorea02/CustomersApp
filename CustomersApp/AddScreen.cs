@@ -12,9 +12,29 @@ namespace CustomersApp
 {
     public partial class AddScreen : Form
     {
-        public AddScreen()
+        DashboardScreen _parent; 
+        public AddScreen(DashboardScreen parent)
         {
+            _parent = parent; 
             InitializeComponent();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            var customer = new Customer()
+            {
+                FirstName = firstNameInput.Text,
+                LastName = lastNameInput.Text,
+                Email = emailInput.Text,
+                Phone = phoneInput.Text
+            };
+
+            DBHelper dBHelper = new DBHelper();
+
+            dBHelper.AddCustomer(customer);
+            _parent.LoadData(); 
+            this.Close(); 
+
         }
     }
 }
