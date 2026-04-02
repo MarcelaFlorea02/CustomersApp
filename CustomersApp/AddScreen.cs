@@ -19,7 +19,7 @@ namespace CustomersApp
             InitializeComponent();
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private async void saveButton_Click(object sender, EventArgs e)
         {
             var customer = new Customer()
             {
@@ -31,8 +31,8 @@ namespace CustomersApp
 
             DBHelper dBHelper = new DBHelper();
 
-            dBHelper.AddCustomer(customer);
-            _parent.LoadData(); 
+            await dBHelper.AddCustomerAsync(customer);
+            await _parent.LoadDataAsync(); 
             this.Close(); 
 
         }

@@ -17,13 +17,13 @@ namespace CustomersApp
             InitializeComponent();
         }
 
-        public void LoadData()
+        public async Task LoadDataAsync()
         {
             DBHelper dBHelper = new DBHelper();
             var customerList = new List<Customer>();
 
             //get customers from db 
-            customerList = dBHelper.GetCustomers();
+            customerList = await dBHelper.GetCustomersAsync();
 
             //construct the table 
             DataTable dataTable = new DataTable();
@@ -46,20 +46,20 @@ namespace CustomersApp
             dataGridView1.DataSource = dataTable;
         }
 
-        private void DashboardScreen_Load(object sender, EventArgs e)
+        private async void DashboardScreen_Load(object sender, EventArgs e)
         {
-            LoadData();
+            await LoadDataAsync();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private async void deleteButton_Click(object sender, EventArgs e)
         {
             DBHelper dBHelper = new DBHelper();
 
             var selectedCustomer = dataGridView1.SelectedRows[0];
             var customerId = Convert.ToInt32(selectedCustomer.Cells["Id"].Value);
 
-            dBHelper.DeleteCustomer(customerId);
-            LoadData();
+            await dBHelper.DeleteCustomerAsync(customerId);
+            await LoadDataAsync();
         }
 
         private void addButton_Click(object sender, EventArgs e)

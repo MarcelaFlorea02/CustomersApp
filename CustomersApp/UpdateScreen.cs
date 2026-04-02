@@ -25,7 +25,7 @@ namespace CustomersApp
             phoneInput.Text = _currentCustomer.Phone;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private async void saveButton_Click(object sender, EventArgs e)
         {
             var customer = new Customer()
             {
@@ -36,10 +36,10 @@ namespace CustomersApp
                 Phone = phoneInput.Text
             };
 
-            DBHelper dBHelper = new DBHelper(); 
-            dBHelper.UpdateCustomer(customer);
-            _parent.LoadData();
-            this.Close(); 
+            DBHelper dBHelper = new DBHelper();
+            await dBHelper.UpdateCustomerAsync(customer);
+            await _parent.LoadDataAsync();
+            this.Close();
         }
     }
 }

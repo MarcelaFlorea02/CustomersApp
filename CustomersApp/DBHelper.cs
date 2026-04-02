@@ -12,7 +12,7 @@ public class DBHelper
     }
 
     //GetAllCustomer 
-    public List<Customer> GetCustomers()
+    public async Task<List<Customer>> GetCustomersAsync()
     {
         var customerList = new List<Customer>();
 
@@ -22,10 +22,10 @@ public class DBHelper
 SELECT Id, FirstName, LastName, Email, Phone, CreatedAt 
 FROM Customer";
 
-        connection.Open();
+        await connection.OpenAsync();
         using var command = new SqlCommand(sql, connection);
 
-        using var reader = command.ExecuteReader();
+        using var reader = await command.ExecuteReaderAsync();
 
         int ordId = reader.GetOrdinal("Id");
         int ordFirstName = reader.GetOrdinal("FirstName");
@@ -34,7 +34,7 @@ FROM Customer";
         int ordPhone = reader.GetOrdinal("Phone");
         int ordCreatedAt = reader.GetOrdinal("CreatedAt");
 
-        while (reader.Read())
+        while (await reader.ReadAsync())
         {
             var customer = new Customer()
             {
@@ -51,7 +51,7 @@ FROM Customer";
     }
 
     //CrateCustomer 
-    public void AddCustomer(Customer customer)
+    public async Task AddCustomerAsync(Customer customer)
     {
         using var connection = new SqlConnection(_dbConnectionString);
 
@@ -59,19 +59,19 @@ FROM Customer";
 INSERT INTO Customer (FirstName, LastName, Email, Phone)
 VALUES (@FirstName, @LastName, @Email, @Phone)";
 
-        connection.Open();
+        await connection.OpenAsync();
         using var command = new SqlCommand(sql, connection);
         command.Parameters.AddWithValue("@FirstName", customer.FirstName);
         command.Parameters.AddWithValue("@LastName", customer.LastName);
         command.Parameters.AddWithValue("@Email", customer.Email);
         command.Parameters.AddWithValue("@Phone", customer.Phone);
 
-        command.ExecuteNonQuery();
+        await command.ExecuteNonQueryAsync();
 
     }
 
     //UpdateCustomer 
-    public void UpdateCustomer(Customer customer)
+    public async Task UpdateCustomerAsync(Customer customer)
     {
         using var connection = new SqlConnection(_dbConnectionString);
 
@@ -84,7 +84,7 @@ Email=@Email,
 Phone=@Phone
 WHERE Id=@Id";
 
-        connection.Open();
+        await connection.OpenAsync();
         using var command = new SqlCommand(sql, connection);
         command.Parameters.AddWithValue("@FirstName", customer.FirstName);
         command.Parameters.AddWithValue("@LastName", customer.LastName);
@@ -92,11 +92,11 @@ WHERE Id=@Id";
         command.Parameters.AddWithValue("@Phone", customer.Phone);
         command.Parameters.AddWithValue("@Id", customer.Id);
 
-        command.ExecuteNonQuery();
+        await command.ExecuteNonQueryAsync();
     }
 
     //DeleteCustomer
-    public void DeleteCustomer(int id)
+    public async Task DeleteCustomerAsync(int id)
     {
         using var connection = new SqlConnection(_dbConnectionString);
 
@@ -104,10 +104,10 @@ WHERE Id=@Id";
 DELETE FROM Customer
 WHERE Id=@Id";
 
-        connection.Open();
+        await connection.OpenAsync();
         using var command = new SqlCommand(sql, connection);
         command.Parameters.AddWithValue("@Id", id);
 
-        command.ExecuteNonQuery();
+        await command.ExecuteNonQueryAsync();
     }
 }
