@@ -24,6 +24,19 @@ namespace CustomersApp
         {
             try
             {
+                var validation = CustomerValidator.Validate(firstNameInput.Text, lastNameInput.Text, emailInput.Text, phoneInput.Text);
+                if (!validation.IsValid)
+                {
+                    MessageBox.Show(this, validation.Message, "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    switch (validation.FieldName)
+                    {
+                        case "firstName": firstNameInput.Focus(); break;
+                        case "lastName": lastNameInput.Focus(); break;
+                        case "email": emailInput.Focus(); break;
+                        case "phone": phoneInput.Focus(); break;
+                    }
+                    return;
+                }
                 var customer = new Customer()
                 {
                     FirstName = firstNameInput.Text,
@@ -36,15 +49,12 @@ namespace CustomersApp
 
                 await dBHelper.AddCustomerAsync(customer);
                 await _parent.LoadDataAsync();
+                this.Close();
             }
             catch (Exception ex)
             {
                 Trace.TraceError("Add Customer throw an error: {0}", ex);
                 MessageBox.Show("An error ocurred while trying to add the customer. ", "Error on add", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                this.Close();
             }
         }
     }

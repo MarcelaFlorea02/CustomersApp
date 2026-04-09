@@ -30,6 +30,19 @@ namespace CustomersApp
         {
             try
             {
+                var validation = CustomerValidator.Validate(firstNameInput.Text, lastNameInput.Text, emailInput.Text, phoneInput.Text);
+                if (!validation.IsValid)
+                {
+                    MessageBox.Show(this, validation.Message, "Validation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    switch (validation.FieldName)
+                    {
+                        case "firstName": firstNameInput.Focus(); break;
+                        case "lastName": lastNameInput.Focus(); break;
+                        case "email": emailInput.Focus(); break;
+                        case "phone": phoneInput.Focus(); break;
+                    }
+                    return;
+                }
                 var customer = new Customer()
                 {
                     Id = _currentCustomer.Id,
@@ -42,15 +55,12 @@ namespace CustomersApp
                 DBHelper dBHelper = new DBHelper();
                 await dBHelper.UpdateCustomerAsync(customer);
                 await _parent.LoadDataAsync();
+                this.Close();
             }
             catch (Exception ex)
             {
                 Trace.TraceError("Update throw an error: {0}", ex);
                 MessageBox.Show("An error ocurred while updating the customer. ", "Error on update", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                this.Close();
             }
         }
     }
