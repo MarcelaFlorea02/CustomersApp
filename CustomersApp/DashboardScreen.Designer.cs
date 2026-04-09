@@ -40,18 +40,20 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 27.9000015F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(40, 38);
+            label1.Location = new Point(24, 23);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(531, 125);
+            label1.Size = new Size(317, 74);
             label1.TabIndex = 0;
             label1.Text = "Dashboard";
             // 
             // addButton
             // 
             addButton.BackColor = Color.FromArgb(128, 255, 128);
-            addButton.Location = new Point(78, 548);
+            addButton.Location = new Point(46, 334);
+            addButton.Margin = new Padding(2, 2, 2, 2);
             addButton.Name = "addButton";
-            addButton.Size = new Size(188, 58);
+            addButton.Size = new Size(111, 35);
             addButton.TabIndex = 1;
             addButton.Text = "ADD";
             addButton.UseVisualStyleBackColor = false;
@@ -60,9 +62,10 @@
             // updateButton
             // 
             updateButton.BackColor = Color.FromArgb(255, 255, 128);
-            updateButton.Location = new Point(78, 663);
+            updateButton.Location = new Point(46, 404);
+            updateButton.Margin = new Padding(2, 2, 2, 2);
             updateButton.Name = "updateButton";
-            updateButton.Size = new Size(188, 58);
+            updateButton.Size = new Size(111, 35);
             updateButton.TabIndex = 2;
             updateButton.Text = "UPDATE";
             updateButton.UseVisualStyleBackColor = false;
@@ -71,9 +74,10 @@
             // deleteButton
             // 
             deleteButton.BackColor = Color.Red;
-            deleteButton.Location = new Point(78, 785);
+            deleteButton.Location = new Point(46, 479);
+            deleteButton.Margin = new Padding(2, 2, 2, 2);
             deleteButton.Name = "deleteButton";
-            deleteButton.Size = new Size(188, 58);
+            deleteButton.Size = new Size(111, 35);
             deleteButton.TabIndex = 3;
             deleteButton.Text = "DELETE";
             deleteButton.UseVisualStyleBackColor = false;
@@ -82,22 +86,24 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(352, 202);
+            dataGridView1.Location = new Point(256, 122);
+            dataGridView1.Margin = new Padding(2, 2, 2, 2);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 102;
-            dataGridView1.Size = new Size(2100, 1065);
+            dataGridView1.Size = new Size(1235, 649);
             dataGridView1.TabIndex = 4;
             // 
             // DashboardScreen
             // 
-            AutoScaleDimensions = new SizeF(17F, 41F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2573, 1390);
+            ClientSize = new Size(1358, 772);
             Controls.Add(dataGridView1);
             Controls.Add(deleteButton);
             Controls.Add(updateButton);
             Controls.Add(addButton);
             Controls.Add(label1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "DashboardScreen";
             Text = "DashboardScreen";
             Load += DashboardScreen_Load;
